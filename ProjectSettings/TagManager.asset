@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: back2
+    uniqueID: 3930891425
+    locked: 0
+  - name: back1
+    uniqueID: 2135125695
+    locked: 0
+  - name: Goal
+    uniqueID: 2621188971
+    locked: 0
+  - name: Fish
+    uniqueID: 3956968045
+    locked: 0
+  - name: Player
+    uniqueID: 3728754035
+    locked: 0
+  - name: Bird
+    uniqueID: 2586642993
     locked: 0
