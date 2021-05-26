@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour
     float jumpForce = 300.0f;
     bool jump = false;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        animator = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,13 +23,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            animator.speed = 1;
+            animator.SetFloat("x", 0);
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
+            animator.speed = 1;
+            animator.SetFloat("x", 1);
             transform.position += Vector3.left * speed * Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !jump)
+        else
+        {
+            animator.speed = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !jump)
         {
             rb2d.AddForce(Vector2.up * jumpForce);
             jump = true;
