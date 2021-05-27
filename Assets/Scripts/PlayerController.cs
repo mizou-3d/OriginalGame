@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     float speed = 5.0f;
     float jumpForce = 300.0f;
     bool jump = false;
+    bool mata = false;
+    GameObject fish;
 
     Animator animator;
 
@@ -16,26 +18,49 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
+        fish = GameObject.Find("Fish");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (!mata)
         {
-            animator.speed = 1;
-            animator.SetFloat("x", 0);
-            transform.position += Vector3.right * speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            animator.speed = 1;
-            animator.SetFloat("x", 1);
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Walk_Right");
+                transform.position += Vector3.right * speed * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Walk_Left");
+                transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+            else
+            {
+                animator.speed = 0;
+            }
         }
         else
         {
-            animator.speed = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.speed = 2;
+                animator.Play("Run_Right");
+                transform.position += Vector3.right * speed * 2 * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                animator.speed = 2;
+                animator.Play("Run_Left");
+                transform.position += Vector3.left * speed * 2 * Time.deltaTime;
+            }
+            else
+            {
+                animator.speed = 0;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !jump)
@@ -45,11 +70,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             jump = false;
         }
+       
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Matatabi")
+        {
+            mata = true;
+            Invoke("RunTime", 2);
+        }
+    }
+
+    void RunTime()
+    {
+        mata = false;
     }
 }

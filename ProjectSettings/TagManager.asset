@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Wall
+  - Fish
+  - Matatabi
   layers:
   - Default
   - TransparentFX
@@ -51,7 +54,7 @@ TagManager:
   - name: Goal
     uniqueID: 2621188971
     locked: 0
-  - name: Fish
+  - name: Item
     uniqueID: 3956968045
     locked: 0
   - name: Player
