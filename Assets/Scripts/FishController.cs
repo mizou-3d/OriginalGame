@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,9 @@ public class FishController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            PointController.instance.AddFish();
+            PointController.instance.SetData();
+            PointController.instance.LogData();
             Destroy(this.gameObject);
         }
     }

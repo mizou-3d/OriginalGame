@@ -86,6 +86,12 @@ public class PlayerController : MonoBehaviour
             mata = true;
             Invoke("RunTime", 2);
         }
+
+        if(collision.gameObject.tag == "Goal")
+        {
+            speed = 0;
+            jumpForce = 0;
+        }
     }
 
     void RunTime()

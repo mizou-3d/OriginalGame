@@ -22,6 +22,9 @@ public class MatatabiController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            PointController.instance.AddMata();
+            PointController.instance.SetData();
+            PointController.instance.LogData();
             Destroy(this.gameObject);
         }
     }
