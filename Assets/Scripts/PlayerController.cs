@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     float jumpForce = 300.0f;
     bool jump = false;
     bool mata = false;
+    bool box = false;
     GameObject fish;
 
     Animator animator;
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!mata)
+        if (!mata && !box)
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -43,19 +44,57 @@ public class PlayerController : MonoBehaviour
                 animator.speed = 0;
             }
         }
-        else
+        else if(mata && !box)
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 animator.speed = 2;
-                animator.Play("Run_Right");
+                animator.Play("Walk_Right");
                 transform.position += Vector3.right * speed * 2 * Time.deltaTime;
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
                 animator.speed = 2;
-                animator.Play("Run_Left");
+                animator.Play("Walk_Left");
                 transform.position += Vector3.left * speed * 2 * Time.deltaTime;
+            }
+            else
+            {
+                animator.speed = 0;
+            }
+        }
+        else if (!mata && box)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Box_Right");
+                transform.position += Vector3.right * speed * 0.5f * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Box_Left");
+                transform.position += Vector3.left * speed * 0.5f * Time.deltaTime;
+            }
+            else
+            {
+                animator.speed = 0;
+            }
+        }
+        else if(mata && box)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Box_Right");
+                transform.position += Vector3.right * speed * 1 * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                animator.speed = 1;
+                animator.Play("Box_Left");
+                transform.position += Vector3.left * speed * 1 * Time.deltaTime;
             }
             else
             {
@@ -67,6 +106,15 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jumpForce);
             jump = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            box = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Z))
+        {
+            box = false;
         }
     }
 
