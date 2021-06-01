@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController m_instance;
     private Rigidbody2D rb2d;
     float speed = 5.0f;
     float jumpForce = 300.0f;
     bool jump = false;
     bool mata = false;
     bool box = false;
-    GameObject fish;
+    //public GameObject bird;
+    public GameObject bird_viewArea;
 
     Animator animator;
 
@@ -19,11 +21,10 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
-        fish = GameObject.Find("Fish");
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!mata && !box)
         {
@@ -145,5 +146,37 @@ public class PlayerController : MonoBehaviour
     void RunTime()
     {
         mata = false;
+    }
+
+    public static PlayerController instance
+    {
+        get
+        {
+            if (m_instance == false)
+            {
+                m_instance = FindObjectOfType<PlayerController>();
+            }
+            return m_instance;
+        }
+    }
+
+    public void BirdAttack()
+    {
+        if (!box)
+        {
+            bird_viewArea.SetActive(false);
+            
+            speed = 0;
+            jumpForce = 0;
+            PointController.instance.LossFish();
+            PointController.instance.SetData();
+            PointController.instance.LogData();
+        }
+    }
+    public void BirdVoid()
+    {
+        bird_viewArea.SetActive(true);
+        speed = 5.0f;
+        jumpForce = 300.0f;
     }
 }
