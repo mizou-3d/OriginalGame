@@ -164,10 +164,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!box)
         {
-            bird_viewArea.SetActive(false);
-            
-            speed = 0;
-            jumpForce = 0;
             PointController.instance.LossFish();
             PointController.instance.SetData();
             PointController.instance.LogData();
@@ -175,7 +171,6 @@ public class PlayerController : MonoBehaviour
     }
     public void BirdVoid()
     {
-        bird_viewArea.SetActive(true);
         speed = 5.0f;
         jumpForce = 300.0f;
     }

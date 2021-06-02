@@ -9,6 +9,7 @@ public class BirdController : MonoBehaviour
 
     public LayerMask mask;
     public GameObject viewArea;
+    bool hit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,33 +31,41 @@ public class BirdController : MonoBehaviour
             speed *= -1;
         }
 
-        Ray ray1 = new Ray(transform.position, new Vector3(-0.3f, -1, 0));
-        Ray ray2 = new Ray(transform.position, new Vector3(-0.2f, -1, 0));
-        Ray ray3 = new Ray(transform.position, new Vector3(0, -1, 0));
-        Ray ray4 = new Ray(transform.position, new Vector3(0.2f, -1, 0));
-        Ray ray5 = new Ray(transform.position, new Vector3(0.3f, -1, 0));
+        Ray ray1 = new Ray(transform.position, new Vector2(-0.3f, -1));
+        Ray ray2 = new Ray(transform.position, new Vector2(-0.2f, -1));
+        Ray ray3 = new Ray(transform.position, new Vector2(0, -1));
+        Ray ray4 = new Ray(transform.position, new Vector2(0.2f, -1));
+        Ray ray5 = new Ray(transform.position, new Vector2(0.3f, -1));
         Debug.DrawRay(ray1.origin, ray1.direction * 8, Color.green);
         Debug.DrawRay(ray2.origin, ray2.direction * 8, Color.green);
         Debug.DrawRay(ray3.origin, ray3.direction * 8, Color.green);
         Debug.DrawRay(ray4.origin, ray4.direction * 8, Color.green);
         Debug.DrawRay(ray5.origin, ray5.direction * 8, Color.green);
 
-        RaycastHit hit;
-        if(Physics.Raycast(ray1, out hit, 10.0f, mask) || Physics.Raycast(ray2, out hit, 10.0f, mask) ||
-            Physics.Raycast(ray3, out hit, 10.0f, mask) || Physics.Raycast(ray4, out hit, 10.0f, mask) ||
-            Physics.Raycast(ray5, out hit, 10.0f, mask))
+        RaycastHit2D hit1 = Physics2D.Raycast((Vector2)ray1.origin, (Vector2)ray1.direction, 10.0f, mask);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)ray2.origin, (Vector2)ray2.direction, 10.0f, mask);
+        RaycastHit2D hit3 = Physics2D.Raycast((Vector2)ray3.origin, (Vector2)ray3.direction, 10.0f, mask);
+        RaycastHit2D hit4 = Physics2D.Raycast((Vector2)ray4.origin, (Vector2)ray4.direction, 10.0f, mask);
+        RaycastHit2D hit5 = Physics2D.Raycast((Vector2)ray5.origin, (Vector2)ray5.direction, 10.0f, mask);
+
+        if (hit1.collider || hit2.collider || hit3.collider || hit4.collider || hit5.collider)
         {
-            Debug.Log("attack");
-            viewArea.SetActive(false);
-            PlayerController.instance.BirdAttack();
-            Invoke("BirdNext", 2.0f);
+            //Debug.Log("attack");
+            if (!hit)
+            {
+                hit = true;
+                PlayerController.instance.BirdAttack();
+                Invoke("BirdNext", 2.0f);
+            }
+            //PlayerController.instance.BirdAttack();
+            //Invoke("BirdNext", 2.0f);
         }
 
     }
 
     void BirdNext()
     {
-        viewArea.SetActive(true);
+        hit = false;
         PlayerController.instance.BirdVoid();
     }
 }
