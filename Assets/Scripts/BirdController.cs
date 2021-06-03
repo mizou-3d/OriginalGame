@@ -50,15 +50,12 @@ public class BirdController : MonoBehaviour
 
         if (hit1.collider || hit2.collider || hit3.collider || hit4.collider || hit5.collider)
         {
-            //Debug.Log("attack");
             if (!hit)
             {
                 hit = true;
                 PlayerController.instance.BirdAttack();
                 Invoke("BirdNext", 2.0f);
             }
-            //PlayerController.instance.BirdAttack();
-            //Invoke("BirdNext", 2.0f);
         }
 
     }
