@@ -36,5 +36,9 @@ public class CameraController : MonoBehaviour
                 m_camera.transform.position = new Vector3(catPlayer.position.x, pos.y, pos.z);
             }
         }
+        if (stopPosition.position.x - right.x < 0)
+        {
+            enabled = false;
+        }
     }
 }

@@ -11,6 +11,8 @@ public class PointController : MonoBehaviour
     public int playerScore = 0;
     public Text fish;
     public Text score;
+    public Text resultScore;
+    public Text resultFish;
 
     // Start is called before the first frame update
    
@@ -81,5 +83,11 @@ public class PointController : MonoBehaviour
     {
         PlayerPrefs.SetInt("fish", 0);
         PlayerPrefs.SetInt("score", 0);
+    }
+
+    public void ResultData()
+    {
+        resultFish.text = ":" + playerFish.ToString("00") + "/15";
+        resultScore.text = "Score:" + playerScore.ToString("00000");
     }
 }

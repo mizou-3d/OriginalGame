@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     bool mata = false;
     bool box = false;
-    //public GameObject bird;
     public GameObject bird_viewArea;
+    public GameObject resultPanel;
+    public bool clear = false;
 
     Animator animator;
 
@@ -138,8 +139,11 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.tag == "Goal")
         {
+            clear = true;
             speed = 0;
             jumpForce = 0;
+            PointController.instance.ResultData();
+            Invoke("ShowResult", 2);
         }
     }
 
@@ -172,6 +176,18 @@ public class PlayerController : MonoBehaviour
     public void BirdVoid()
     {
         speed = 5.0f;
-        jumpForce = 300.0f;
+        jumpForce = 500.0f;
+    }
+
+    public void MovementStop()
+    {
+        speed = 0;
+        jumpForce = 0;
+        animator.speed = 0;
+    }
+
+    void ShowResult()
+    {
+        resultPanel.SetActive(true);
     }
 }

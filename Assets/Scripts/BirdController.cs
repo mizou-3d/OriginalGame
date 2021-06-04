@@ -14,14 +14,12 @@ public class BirdController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //bird_pos = GetComponent<Transform>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //bird_pos = this.transform;
-        //Vector2 pos = bird_pos.position;
 
        count++;
         transform.Translate(speed * Vector2.left * Time.deltaTime);
