@@ -12,6 +12,8 @@ public class TimeController : MonoBehaviour
     public GameObject panel;
     GameObject player;
     PlayerController playerscript;
+    public AudioClip timeOverVoice;
+    bool timeOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class TimeController : MonoBehaviour
             if (!playerscript.clear)
             {
                 panel.SetActive(true);
+                SendMessage("TimeOverVoice");
             }
         }
         else
@@ -37,6 +40,15 @@ public class TimeController : MonoBehaviour
             time -= Time.deltaTime;
             seconds = (int)time;
             timer.text = "TIME : " + seconds.ToString();
+        }
+    }
+
+    void TimeOverVoice()
+    {
+        if (!timeOver)
+        {
+            AudioSourceController.instance.PlayOneShot(timeOverVoice);
+            timeOver = true;
         }
     }
 }

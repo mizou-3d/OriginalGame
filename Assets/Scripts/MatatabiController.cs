@@ -5,6 +5,7 @@ using UnityEngine;
 public class MatatabiController : MonoBehaviour
 {
     public GameObject player;
+    public AudioClip mataGet;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class MatatabiController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            AudioSourceController.instance.PlayOneShot(mataGet);
             PointController.instance.AddMata();
             PointController.instance.SetData();
             PointController.instance.LogData();

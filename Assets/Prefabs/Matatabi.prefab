@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  mataGet: {fileID: 8300000, guid: f510b47aba9304fa9a108e7f4c7c75b9, type: 3}

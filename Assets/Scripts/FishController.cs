@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
-
+    public AudioClip fishGet;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class FishController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            AudioSourceController.instance.PlayOneShot(fishGet);
             PointController.instance.AddFish();
             PointController.instance.SetData();
             PointController.instance.LogData();

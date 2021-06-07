@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8162f95286846fcbd4aab2dbb05f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishGet: {fileID: 8300000, guid: e4709bced92b74f73aec80ad74a8578e, type: 3}
 --- !u!61 &1293709474
 BoxCollider2D:
   m_ObjectHideFlags: 0
