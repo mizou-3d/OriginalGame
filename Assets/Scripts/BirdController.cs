@@ -11,10 +11,18 @@ public class BirdController : MonoBehaviour
     public GameObject viewArea;
     bool hit = false;
 
+    GameObject player;
+    PlayerController playerscript;
+
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = this.gameObject.GetComponent<Animator>();
+        player = GameObject.Find("Player");
+        playerscript = player.GetComponent<PlayerController>();
+        animator.SetFloat("x", 0);
     }
 
     // Update is called once per frame
@@ -48,19 +56,29 @@ public class BirdController : MonoBehaviour
 
         if (hit1.collider || hit2.collider || hit3.collider || hit4.collider || hit5.collider)
         {
-            if (!hit)
+            if (!hit && !playerscript.box)
             {
+                viewArea.SetActive(false);
+                animator.SetFloat("x", 1);
                 hit = true;
-                PlayerController.instance.BirdAttack();
                 Invoke("BirdNext", 2.0f);
             }
         }
 
     }
 
+    void BirdAtacck()
+    {
+        PointController.instance.LossFish();
+        PointController.instance.SetData();
+        PointController.instance.LogData();
+    }
+
     void BirdNext()
     {
+        viewArea.SetActive(true);
+        animator.SetFloat("x", 0);
         hit = false;
-        PlayerController.instance.BirdVoid();
+        //PlayerController.instance.BirdVoid();
     }
 }

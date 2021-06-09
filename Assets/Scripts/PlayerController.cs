@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     float jumpForce = 300.0f;
     bool jump = false;
     bool mata = false;
-    bool box = false;
+    public bool box = false;
     public GameObject bird_viewArea;
     public GameObject resultPanel;
     public bool clear = false;
@@ -164,15 +164,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void BirdAttack()
+    /*public void BirdAttack()
     {
         if (!box)
         {
+            bird_viewArea.SetActive(false);
             PointController.instance.LossFish();
             PointController.instance.SetData();
             PointController.instance.LogData();
         }
-    }
+    }*/
     public void BirdVoid()
     {
         speed = 5.0f;
