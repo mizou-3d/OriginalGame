@@ -87,7 +87,7 @@ public class PointController : MonoBehaviour
 
     public void ResultData()
     {
-        resultFish.text = ":" + playerFish.ToString("00") + "/15";
+        resultFish.text = ":" + playerFish.ToString("00");
         resultScore.text = "Score:" + playerScore.ToString("00000");
     }
 }
