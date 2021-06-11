@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class EnterHardStage : MonoBehaviour
 {
+    public AudioClip selectStage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,13 @@ public class EnterHardStage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("World_2");
+            AudioSourceController.instance.PlayOneShot(selectStage);
+            Invoke("HardStage", 1.0f);
         }
+    }
+
+    void HardStage()
+    {
+        SceneManager.LoadScene("World_2");
     }
 }

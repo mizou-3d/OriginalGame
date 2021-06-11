@@ -14,6 +14,7 @@ public class TimeController : MonoBehaviour
     PlayerController playerscript;
     public AudioClip timeOverVoice;
     bool timeOver = false;
+    public GameObject bgm;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class TimeController : MonoBehaviour
             PlayerController.instance.MovementStop();
             if (!playerscript.clear)
             {
+                bgm.SetActive(false);
                 panel.SetActive(true);
                 SendMessage("TimeOverVoice");
             }

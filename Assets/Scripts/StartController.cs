@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class StartController : MonoBehaviour
 {
+    public AudioClip selectStage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,13 @@ public class StartController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("Load");
+            AudioSourceController.instance.PlayOneShot(selectStage);
+            Invoke("SceneLoad", 1.0f);
         }
+    }
+
+    void SceneLoad()
+    {
+        SceneManager.LoadScene("Load");
     }
 }

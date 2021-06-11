@@ -15,6 +15,7 @@ public class BirdController : MonoBehaviour
     PlayerController playerscript;
 
     Animator animator;
+    public AudioClip bird;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +70,7 @@ public class BirdController : MonoBehaviour
 
     void BirdAtacck()
     {
+        AudioSourceController.instance.PlayOneShot(bird);
         PointController.instance.LossFish();
         PointController.instance.SetData();
         PointController.instance.LogData();
@@ -76,9 +78,11 @@ public class BirdController : MonoBehaviour
 
     void BirdNext()
     {
+        Vector2 pos = transform.position;
+        pos.y = 3.5f;
+        transform.position = pos;
         viewArea.SetActive(true);
         animator.SetFloat("x", 0);
         hit = false;
-        //PlayerController.instance.BirdVoid();
     }
 }

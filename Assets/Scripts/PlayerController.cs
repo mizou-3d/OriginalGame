@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bird_viewArea;
     public GameObject resultPanel;
     public bool clear = false;
+    public AudioClip clearSound;
+    public GameObject bgm;
 
     Animator animator;
 
@@ -163,17 +165,6 @@ public class PlayerController : MonoBehaviour
             return m_instance;
         }
     }
-
-    /*public void BirdAttack()
-    {
-        if (!box)
-        {
-            bird_viewArea.SetActive(false);
-            PointController.instance.LossFish();
-            PointController.instance.SetData();
-            PointController.instance.LogData();
-        }
-    }*/
     public void BirdVoid()
     {
         speed = 5.0f;
@@ -189,6 +180,8 @@ public class PlayerController : MonoBehaviour
 
     void ShowResult()
     {
+        bgm.SetActive(false);
         resultPanel.SetActive(true);
+        AudioSourceController.instance.PlayOneShot(clearSound);
     }
 }

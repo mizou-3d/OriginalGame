@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class EnterEasyStage : MonoBehaviour
 {
+    public AudioClip selectStage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,13 @@ public class EnterEasyStage : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("World_1");
+            AudioSourceController.instance.PlayOneShot(selectStage);
+            Invoke("EasyStage", 1.0f);
         }
+    }
+
+    void EasyStage()
+    {
+        SceneManager.LoadScene("World_1");
     }
 }
